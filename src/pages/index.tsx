@@ -1,13 +1,23 @@
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+
+import ChangeLanguage from '@/components/ChangeLanguage';
 import GlobalLayout from './layout/GlobalLayout';
 import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import styled from 'styled-components';
+import { useTranslation } from 'next-i18next';
 
 // Testing if styled components work
 const Title = styled.h1`
   color: rgba(220, 36, 31, 1);
 `;
 
+const SecondaryTitle = styled.h2`
+  color: rgba(0, 0, 0, 1);
+`;
+
 export default function Home() {
+  const { t } = useTranslation('common');
   return (
     <>
       <GlobalLayout>
@@ -18,9 +28,19 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
+          <ChangeLanguage />
           <Title>Test Styled components</Title>
+          <SecondaryTitle>{t('title')}</SecondaryTitle>
         </main>
       </GlobalLayout>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+}: GetServerSidePropsContext) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? 'de-CH', ['common'])),
+  },
+});
