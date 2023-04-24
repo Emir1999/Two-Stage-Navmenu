@@ -1,0 +1,12 @@
+{
+    "eslint.validate": ["typescript", "typescriptreact"],
+    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+    "editor.formatOnSave": true,
+  
+    "eslint.alwaysShowStatus": true,
+    "files.autoSave": "onFocusChange",
+    "i18n-ally.localesPaths": ["public/locales"],
+    "i18n-ally.sourceLanguage": "en",
+    "i18n-ally.keystyle": "nested",
+    "css.lint.unknownAtRules": "ignore"
+}
