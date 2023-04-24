@@ -1,12 +1,12 @@
 {
     "eslint.validate": ["typescript", "typescriptreact"],
-    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
-    "editor.formatOnSave": true,
-  
+    "editor.codeActionsOnSave": { "source.fixAll.eslint": true },  
     "eslint.alwaysShowStatus": true,
     "files.autoSave": "onFocusChange",
     "i18n-ally.localesPaths": ["public/locales"],
     "i18n-ally.sourceLanguage": "en",
     "i18n-ally.keystyle": "nested",
-    "css.lint.unknownAtRules": "ignore"
+    "css.lint.unknownAtRules": "ignore",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
 }
