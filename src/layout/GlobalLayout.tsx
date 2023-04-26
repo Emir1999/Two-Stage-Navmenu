@@ -10,17 +10,24 @@ export const GlobalStyle = createGlobalStyle`
 
   html,
   body {
-    max-width: 100vw;
-    overflow-x: hidden;
+    min-height: 100vw;
   }
- 
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
+
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
   }
 
   body {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');    
+    font-family: 'Inter', sans-serif;
     background-color: rgba(255, 255, 255, 1);
   }
 `;

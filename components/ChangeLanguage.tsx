@@ -10,8 +10,14 @@ export default function ChangeLanguage() {
   const [selectedLang, useSelectedLanguage] = useState<string>(
     LANGUAGES[0].key
   );
-
   const router = useRouter();
+
+  const onLanguageChange = (e: any) => {
+    useSelectedLanguage(e.target.value);
+    router.push(router.pathname, router.asPath, {
+      locale: e.target.value,
+    });
+  };
 
   return (
     <>
@@ -19,12 +25,7 @@ export default function ChangeLanguage() {
         name="languages"
         id="change-language"
         value={selectedLang}
-        onChange={(e) => {
-          useSelectedLanguage(e.target.value);
-          router.push(router.pathname, router.asPath, {
-            locale: e.target.value,
-          });
-        }}
+        onChange={(e) => onLanguageChange(e)}
       >
         {LANGUAGES.map((lang, index) => (
           <option key={index} value={lang.key}>
