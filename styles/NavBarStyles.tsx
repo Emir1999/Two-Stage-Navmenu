@@ -6,6 +6,7 @@ export const NavChevronDown = styled(ChevronDown)`
   font-weight: 600;
   height: 1.2rem;
   width: 1.2rem;
+  pointer-events: none;
   transition: 0.3s ease-in-out;
 `;
 
@@ -35,6 +36,7 @@ export const NavItem = styled(Link)`
 
 export const NavItems = styled.div`
   display: flex;
+  position: relative;
   align-items: center;
   height: 5rem;
   gap: 2rem;
