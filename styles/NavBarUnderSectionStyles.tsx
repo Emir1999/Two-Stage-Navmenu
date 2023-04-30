@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-export const NavBarUnderContainer = styled.div`
+interface NavBarUnderContainerProps {
+  right?: any;
+}
+
+export const NavBarUnderContainer = styled.div<NavBarUnderContainerProps>`
   position: absolute;
-  right: 480;
-  margin-left: auto;
   top: 0.2rem;
   background-color: rgba(255, 255, 255, 1);
   max-width: 30rem;

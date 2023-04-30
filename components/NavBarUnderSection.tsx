@@ -1,14 +1,15 @@
 import { NavBarUnderContainer } from 'styles/NavBarUnderSectionStyles';
+import { forwardRef } from 'react';
 
-export default function NavBarUnderSection({ id }: any) {
+const NavBarUnderSection = forwardRef(({ right, id }: any, ref: any) => {
   return (
     <>
-      <NavBarUnderContainer id={id}>
-        <h2 style={{ width: '100%', whiteSpace: 'nowrap', overflow: 'hidden' }}>
-          Hello this is the
-          containercscscscsssssssssssssssssssssssssssssssssssssssssssssssssssss
-        </h2>
+      <NavBarUnderContainer ref={ref} id={id} right={right}>
+        <h2>Hello efwbebfjwbefjhwebfjhwbejf</h2>
       </NavBarUnderContainer>
     </>
   );
-}
+});
+
+NavBarUnderSection.displayName = 'Search';
+export default NavBarUnderSection;

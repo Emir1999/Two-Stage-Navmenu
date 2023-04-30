@@ -5,6 +5,7 @@ import {
   NavItems,
   NavSpan,
 } from 'styles/NavBarStyles';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ChangeLanguage from './ChangeLanguage';
 import Image from 'next/image';
@@ -13,6 +14,17 @@ import bucherLogo from '@/public/bucherLogo.svg';
 import { createRoot } from 'react-dom/client';
 
 export default function NavBar() {
+  const [elementCreated, setElementCreated] = useState(false);
+  const [bodyWidth, setBodyWidth] = useState(0);
+  const [differencePercentage, setDifferencePercentage] = useState(0);
+  const [myElement, setMyElement] = useState<HTMLElement>();
+
+  const myRef = useCallback((node: any) => {
+    if (node !== null) {
+      setMyElement(node);
+    }
+  }, []);
+
   const navItems = [
     {
       id: 'nav-bucher__us',
@@ -122,33 +134,70 @@ export default function NavBar() {
     },
   ];
 
-  const onHover = (e: any) => {
-    if (document.getElementById(e.target.id + '--child')) return;
+  const onHover = (e: any, item: any) => {
+    const { target } = e;
+
+    if (document.getElementById(item.id + '--child')) return;
+
+    // Source - https://stackoverflow.com/a/30949389
+    const rect = target.getBoundingClientRect();
+    const position = {
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX,
+    };
+
+    const rightBorderFromLeft = position.left + target.offsetWidth;
+    const fromRight = document.body.offsetWidth - rightBorderFromLeft;
 
     const navBarUnderRoot = document.createElement('div');
-    navBarUnderRoot.id = e.target.id + '--child';
+    navBarUnderRoot.id = item.id + '--child';
     navBarUnderRoot.style.position = 'absolute';
-    navBarUnderRoot.style.bottom = e.target.offsetBottom;
-    navBarUnderRoot.style.left = `${e.target.offsetLeft}px`;
+    navBarUnderRoot.style.bottom = target.offsetBottom;
 
-    console.log(e.target.offsetLeft);
+    const bodyWidth = document.body.offsetWidth;
 
+    const leftPercentage = (position.left / bodyWidth) * 100;
+    const rightPercentage = (fromRight / bodyWidth) * 100;
+
+    const findPercentage = leftPercentage - rightPercentage;
+
+    setBodyWidth(bodyWidth);
+    setDifferencePercentage(findPercentage);
     document.body.appendChild(navBarUnderRoot);
 
-    const navBarUnder = <NavBarUnderSection />;
+    const navBarUnder = (
+      <NavBarUnderSection
+        id={item.id + '---child'}
+        right={fromRight}
+        ref={myRef}
+      />
+    );
     const root = createRoot(navBarUnderRoot);
     root.render(navBarUnder);
 
-    if (navBarUnderRoot?.children[0])
-      console.log((navBarUnderRoot.children[0] as HTMLElement).offsetWidth);
-
-    // navBarUnderRoot.style.right = '480px';
+    if (navBarUnderRoot?.children[0]) {
+    }
+    setElementCreated(true);
   };
 
   const onLeave = (e: any) => {
-    const navBarUnder = document.getElementById(e.target.id + '--child');
+    if (typeof window === 'undefined') return;
+    const id = e.target.parentElement.id;
+    const navBarUnder = document.getElementById(id + '--child');
     if (navBarUnder) navBarUnder.remove();
+    setElementCreated(false);
   };
+
+  useEffect(() => {
+    if (myElement) {
+      const refWidth = myElement.offsetWidth;
+      const firstStep = (refWidth / bodyWidth) * 100;
+      const secondStep = (100 - firstStep) / 2;
+      const finalStep = secondStep + differencePercentage / 2;
+      myElement.parentElement!.style.left = `${finalStep}%`;
+      setElementCreated(false);
+    }
+  }, [bodyWidth, differencePercentage, myElement]);
 
   return (
     <>
@@ -156,12 +205,14 @@ export default function NavBar() {
         <Image src={bucherLogo} alt="Logo" width={100} height={18} />
         <NavItems>
           {navItems.map((item, index) => (
-            <NavItem href={'#'} key={index}>
-              <NavSpan
-                id={item.id}
-                onMouseOut={(e) => onLeave(e)}
-                onMouseOver={(e) => onHover(e)}
-              >
+            <NavItem
+              id={item.id}
+              onMouseOut={(e) => onLeave(e)}
+              onMouseOver={(e) => onHover(e, item)}
+              href={'#'}
+              key={index}
+            >
+              <NavSpan>
                 {item.name} <NavChevronDown width={16} height={16} />
               </NavSpan>
             </NavItem>
