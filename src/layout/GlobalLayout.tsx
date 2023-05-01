@@ -10,7 +10,9 @@ export const GlobalStyle = createGlobalStyle`
 
   html,
   body {
-    min-height: 100vw;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
   }
 
   a:link {

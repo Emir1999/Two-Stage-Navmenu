@@ -1,56 +1,97 @@
 import { ChevronDown } from 'react-feather';
 import Link from 'next/link';
 import styled from 'styled-components';
+import ChangeLanguage from '@/components/ChangeLanguage';
 
 export const NavChevronDown = styled(ChevronDown)`
   font-weight: 600;
   height: 1.2rem;
   width: 1.2rem;
-  pointer-events: none;
   transition: 0.3s ease-in-out;
+  pointer-events: none;
 `;
 
 export const NavSpan = styled.span`
-  height: 100%;
+  font-size: 1.2rem;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    font-size: 1.1rem;
+  }
+`;
+
+export const NavItem = styled(Link)`
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  color: rgba(0, 0, 0, 1);
+  height: 100%;
+  width: auto;
+  font-weight: 500;
 
-  &:hover {
+  &.active {
     padding-top: 0.2rem;
     border-bottom: 0.2rem solid rgba(220, 36, 31, 1);
     color: rgba(220, 36, 31, 1);
   }
 
-  &:hover ${NavChevronDown} {
+  &.active > ${NavChevronDown} {
     transform: rotate(180deg);
   }
-`;
 
-export const NavItem = styled(Link)`
-  font-size: 1.2rem;
-  height: 100%;
-  font-weight: 500;
+  @media (max-width: 1024px) {
+    width: 100%;
+    max-width: 6rem;
+    gap: 0;
+  }
 `;
 
 export const NavItems = styled.div`
   display: flex;
   position: relative;
   align-items: center;
-  height: 5rem;
+  height: 100%;
   gap: 2rem;
+
+  @media (max-width: 1024px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const NavContainer = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%;
+  height: 5rem;
+  max-width: 80rem;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   margin-left: auto;
   margin-right: auto;
-  margin-top: 4rem;
   border-radius: 0.3rem;
   padding: 0 2rem;
+
+  @media (max-width: 1024px) {
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 1440px) {
+    max-width: 95%;
+  }
 `;
+
+const size = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px',
+};

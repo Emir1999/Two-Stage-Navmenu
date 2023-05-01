@@ -1,30 +1,31 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { ChangeLanguageStyle } from 'styles/ChangeLanguageStyles';
 
-export default function ChangeLanguage() {
+export interface ChangeLanguageProps {
+  position?: string;
+}
+
+export default function ChangeLanguage({ position }: ChangeLanguageProps) {
   const LANGUAGES = [
     { key: 'de-CH', value: 'German' },
     { key: 'en-CH', value: 'English' },
   ];
 
-  const [selectedLang, useSelectedLanguage] = useState<string>(
-    LANGUAGES[0].key
-  );
   const router = useRouter();
 
   const onLanguageChange = (e: any) => {
-    useSelectedLanguage(e.target.value);
-    router.push(router.pathname, router.asPath, {
+    router.push(router.asPath, undefined, {
       locale: e.target.value,
     });
   };
 
   return (
     <>
-      <select
+      <ChangeLanguageStyle
+        position={position}
         name="languages"
         id="change-language"
-        value={selectedLang}
+        value={router.locale?.toUpperCase()}
         onChange={(e) => onLanguageChange(e)}
       >
         {LANGUAGES.map((lang, index) => (
@@ -32,7 +33,7 @@ export default function ChangeLanguage() {
             {lang.value}
           </option>
         ))}
-      </select>
+      </ChangeLanguageStyle>
     </>
   );
 }
