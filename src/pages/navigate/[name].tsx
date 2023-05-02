@@ -1,6 +1,3 @@
-import { GetStaticProps, GetStaticPropsContext } from 'next';
-
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 
 export default function NavName() {
