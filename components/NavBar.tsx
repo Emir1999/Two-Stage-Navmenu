@@ -146,7 +146,7 @@ export default function NavBar() {
               id={item.id}
               onMouseLeave={() => onLeave()}
               onMouseEnter={(e) => onHover(e, item, navItems)}
-              href={'#'}
+              href={{ pathname: 'navigate/[name]', query: { name: item.link } }}
               key={index}
             >
               <NavSpan>{item.title}</NavSpan>

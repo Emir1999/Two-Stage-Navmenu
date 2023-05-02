@@ -8,7 +8,7 @@ export function NavItemsRoute() {
     {
       id: 'nav-bucher__us',
       title: t('links.about-us'),
-      link: 'mission',
+      link: 'about-us',
       children: [
         {
           id: 'nav-bucher__mission',
@@ -19,37 +19,37 @@ export function NavItemsRoute() {
         {
           id: 'nav-bucher__board-directors',
           title: t('links.board-directors'),
-          link: 'mission',
+          link: 'board-directors',
           children: [],
         },
         {
           id: 'nav-bucher__group-managment',
           title: t('links.group-managment'),
-          link: 'mission',
+          link: 'group-managment',
           children: [],
         },
         {
           id: 'nav-bucher__metrics',
           title: t('links.metrics'),
-          link: 'mission',
+          link: 'metrics',
           children: [],
         },
         {
           id: 'nav-bucher__locations',
           title: t('links.locations'),
-          link: 'mission',
+          link: 'locations',
           children: [],
         },
         {
           id: 'nav-bucher__sustainability',
           title: t('links.sustainability'),
-          link: 'mission',
+          link: 'sustainability',
           children: [],
         },
         {
           id: 'nav-bucher__history',
           title: t('links.history'),
-          link: 'mission',
+          link: 'history',
           children: [],
         },
       ],
@@ -57,36 +57,36 @@ export function NavItemsRoute() {
     {
       id: 'nav-bucher__business',
       title: t('links.business'),
-      link: 'mission',
+      link: 'business',
       children: [
         {
           id: 'nav-bucher__kuhn',
           title: t('links.kuhn'),
-          link: 'mission',
+          link: 'kuhn',
           children: [],
         },
         {
           id: 'nav-bucher__municipal',
           title: t('links.municipal'),
-          link: 'mission',
+          link: 'municipal',
           children: [],
         },
         {
           id: 'nav-bucher__hydraulics',
           title: t('links.hydraulics'),
-          link: 'mission',
+          link: 'hydraulics',
           children: [],
         },
         {
           id: 'nav-bucher__emhart-glass',
           title: t('links.emhart-glass'),
-          link: 'mission',
+          link: 'emhart-glass',
           children: [],
         },
         {
           id: 'nav-bucher__specials',
           title: t('links.specials'),
-          link: 'mission',
+          link: 'specials',
           children: [],
         },
       ],
@@ -94,36 +94,36 @@ export function NavItemsRoute() {
     {
       id: 'nav-bucher__investors',
       title: t('links.investors'),
-      link: 'mission',
+      link: 'investors',
       children: [
         {
           id: 'nav-bucher__actions',
           title: t('links.actions'),
-          link: 'mission',
+          link: 'actions',
           children: [],
         },
         {
           id: 'nav-bucher__general-assembly',
           title: t('links.general-assembly'),
-          link: 'mission',
+          link: 'assembly',
           children: [],
         },
         {
           id: 'nav-bucher__corporate-governance',
           title: t('links.governance'),
-          link: 'mission',
+          link: 'corporate-governance',
           children: [],
         },
         {
           id: 'nav-bucher__finance-reports',
           title: t('links.finance-reports'),
-          link: 'mission',
+          link: 'finance-reports',
           children: [],
         },
         {
           id: 'nav-bucher__appointments',
           title: t('links.appointments'),
-          link: 'mission',
+          link: 'appointments',
           children: [],
         },
       ],
@@ -131,42 +131,42 @@ export function NavItemsRoute() {
     {
       id: 'nav-bucher__media',
       title: t('links.media'),
-      link: 'mission',
+      link: 'media',
       children: [
         {
           id: 'nav-bucher__media-share',
           title: t('links.media-share'),
-          link: 'mission',
+          link: 'media-share',
           children: [],
         },
         {
           id: 'nav-bucher__ad',
           title: t('links.ad'),
-          link: 'mission',
+          link: 'ad',
           children: [],
         },
         {
           id: 'nav-bucher__media-dose',
           title: t('links.media-dose'),
-          link: 'mission',
+          link: 'media-dose',
           children: [],
         },
         {
           id: 'nav-bucher__publications',
           title: t('links.publications'),
-          link: 'mission',
+          link: 'publications',
           children: [],
         },
         {
           id: 'nav-bucher__presentations',
           title: t('links.presentations'),
-          link: 'mission',
+          link: 'presentations',
           children: [],
         },
         {
           id: 'nav-bucher__photos',
           title: t('links.photos'),
-          link: 'mission',
+          link: 'photos',
           children: [],
         },
       ],
@@ -174,22 +174,22 @@ export function NavItemsRoute() {
     {
       id: 'nav-bucher__career',
       title: t('links.career'),
-      link: 'mission',
+      link: 'career',
       children: [
         {
           id: 'nav-bucher__jobs',
           title: t('links.jobs'),
-          link: 'mission',
+          link: 'jobs',
           children: [
             {
               id: 'nav-bucher__contact',
               title: t('links.contact'),
-              link: 'mission',
+              link: 'contact',
               children: [
                 {
                   id: 'nav-bucher__subscribe',
                   title: t('links.subscribe'),
-                  link: 'mission',
+                  link: 'subscribe',
                   children: [],
                 },
               ],
@@ -199,13 +199,13 @@ export function NavItemsRoute() {
         {
           id: 'nav-bucher__industries',
           title: t('links.industries'),
-          link: 'mission',
+          link: 'industries',
           children: [],
         },
         {
           id: 'nav-bucher__open-positions',
           title: t('links.open-positions'),
-          link: 'mission',
+          link: 'open-positions',
           children: [],
         },
       ],
