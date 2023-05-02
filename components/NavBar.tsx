@@ -23,12 +23,15 @@ import { NavItemsRoute } from '@/lib/routes';
 import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
 import { createUnderSection } from '@/lib/hooks/createUnderSection';
+import { useTranslation } from 'next-i18next';
 
 export interface Position extends DOMRect {
   rightBorder: number;
 }
 
 export default function NavBar() {
+  const { t } = useTranslation();
+
   const [bodyWidth, setBodyWidth] = useState<number>(0);
   const [differencePercentage, setDifferencePercentage] = useState<number>(0);
   const [myElement, setMyElement] = useState<HTMLElement>();
@@ -164,7 +167,7 @@ export default function NavBar() {
         </LanguageButtonStyle>
         {openLanguageModal ? (
           <ChangeLanguage
-            title="Change Language"
+            title={t('language')}
             openModal={openLanguageModal}
             setOpenModal={setOpenLanguageModal}
           />
