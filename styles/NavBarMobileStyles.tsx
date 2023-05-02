@@ -1,12 +1,12 @@
+import Image from 'next/image';
 import { X } from 'react-feather';
 import styled from 'styled-components';
-import Image from 'next/image';
 
 export const BarOne = styled.div`
   width: 25px;
   height: 2px;
   background-color: rgba(0, 0, 0, 1);
-  margin: 4.5px 0;
+  margin: 5px 0;
   transition: 0.3s;
   border-radius: 0.3rem;
   pointer-events: none;
@@ -27,6 +27,8 @@ export const BurgerButton = styled.button`
     background-color: transparent;
     margin-left: auto;
     border: none;
+    padding: 0.45rem 0.5rem;
+    border-radius: 0.3rem;
 
     &.change > ${BarOne} {
       transform: translate(0, 7px) rotate(-45deg);
@@ -39,6 +41,14 @@ export const BurgerButton = styled.button`
 
     &.change > ${BarThree} {
       transform: translate(0, -6px) rotate(45deg);
+      background-color: rgba(220, 36, 31, 1);
+    }
+
+    &:hover {
+      background-color: #dedede;
+    }
+
+    &:hover > ${BarOne}, &:hover > ${BarTwo}, &:hover > ${BarThree} {
       background-color: rgba(220, 36, 31, 1);
     }
   }

@@ -21,7 +21,6 @@ import {
   SectionLine,
 } from 'styles/NavBarUnderSectionStyles';
 
-import ChangeLanguage from './ChangeLanguage';
 import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
 import { NavItem } from '@/models/NavItem';
 import bucherLogo from '@/public/bucherLogo.svg';

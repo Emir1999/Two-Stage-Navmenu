@@ -4,6 +4,7 @@ import {
   BarTwo,
   BurgerButton,
 } from 'styles/NavBarMobileStyles';
+import { GlobeStyle, LanguageButtonStyle } from 'styles/ChangeLanguageStyles';
 import {
   NavChevronDown,
   NavContainer,
@@ -14,6 +15,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ChangeLanguage from './ChangeLanguage';
+import { Globe } from 'react-feather';
 import Image from 'next/image';
 import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
 import { NavItem } from '@/models/NavItem';
@@ -131,15 +133,13 @@ export default function NavBar() {
     createMobileSlider({ items: navItems, navTree, burgerRef });
   };
 
+  const [openLanguageModal, setOpenLanguageModal] = useState(false);
+
   return (
     <>
       <NavContainer>
         <Image src={bucherLogo} alt="Logo" width={100} height={20} />
-        <BurgerButton ref={burgerRef} onClick={(e) => handleClick(e, navItems)}>
-          <BarOne></BarOne>
-          <BarTwo></BarTwo>
-          <BarThree></BarThree>
-        </BurgerButton>
+
         <NavItems>
           {navItems.map((item, index) => (
             <NavItemStyle
@@ -154,7 +154,21 @@ export default function NavBar() {
             </NavItemStyle>
           ))}
         </NavItems>
-        <ChangeLanguage position={'navbar'} />
+        <BurgerButton ref={burgerRef} onClick={(e) => handleClick(e, navItems)}>
+          <BarOne></BarOne>
+          <BarTwo></BarTwo>
+          <BarThree></BarThree>
+        </BurgerButton>
+        <LanguageButtonStyle onClick={() => setOpenLanguageModal(true)}>
+          <GlobeStyle />
+        </LanguageButtonStyle>
+        {openLanguageModal ? (
+          <ChangeLanguage
+            title="Change Language"
+            openModal={openLanguageModal}
+            setOpenModal={setOpenLanguageModal}
+          />
+        ) : null}
       </NavContainer>
     </>
   );

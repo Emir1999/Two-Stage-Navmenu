@@ -1,3 +1,5 @@
 export interface ChangeLanguageProps {
-  position: string;
+  title: string;
+  openModal: boolean;
+  setOpenModal: any;
 }
