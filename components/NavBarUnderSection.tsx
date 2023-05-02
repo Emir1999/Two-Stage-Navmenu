@@ -106,7 +106,11 @@ const NavBarUnderSection = forwardRef(
         onMouseEnter={() => setDropDown(true)}
         onMouseLeave={() => setDropDown(false)}
         ref={ref}
-        id={item.id + '--under'}
+        id={
+          (parent as NavItem).id
+            ? (parent as NavItem).id + '--under'
+            : item.id + '--under'
+        }
       >
         {navTree.length > 0 ? (
           <NavBarUnderTitleSection>

@@ -19,7 +19,6 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ChangeLanguage from './ChangeLanguage';
-import { Globe } from 'react-feather';
 import Image from 'next/image';
 import { NavItem } from '@/models/NavItem';
 import { NavItemsRoute } from '@/lib/routes';
