@@ -1,4 +1,5 @@
 import { X } from 'react-feather';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const XStyled = styled(X)`
@@ -38,7 +39,7 @@ export const ModalTitleContainerStyle = styled.div`
   align-items: center;
 `;
 
-export const ModalContainerStyle = styled.div`
+export const ModalContainerStyle = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -63,7 +64,15 @@ export const ModalContainerStyle = styled.div`
 
   @media (max-width: 768px) {
     width: 95%;
-    top: 89%;
-    padding: 2rem 1rem;
+    padding: 2rem 2rem;
+    padding-bottom: 2rem;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+    bottom: 0;
+    top: auto;
+    border-radius: 0.3rem 0.3rem 0 0;
   }
 `;

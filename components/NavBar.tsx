@@ -1,4 +1,8 @@
 import {
+  AnimationState,
+  NavBarUnderSectionProps,
+} from '@/models/props/NavBarUnderSectionProps';
+import {
   BarOne,
   BarThree,
   BarTwo,
@@ -17,7 +21,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ChangeLanguage from './ChangeLanguage';
 import { Globe } from 'react-feather';
 import Image from 'next/image';
-import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
 import { NavItem } from '@/models/NavItem';
 import { NavItemsRoute } from '@/lib/routes';
 import bucherLogo from '@/public/bucherLogo.svg';
@@ -96,6 +99,7 @@ export default function NavBar() {
       setDifferencePercentage,
       parent: p,
       navTree: [],
+      animationState: AnimationState.INIT,
     };
 
     createUnderSection({ ...underSectionProps });
@@ -133,7 +137,12 @@ export default function NavBar() {
 
     const navTree: NavItem | NavItem[] | [] = [];
 
-    createMobileSlider({ items: navItems, navTree, burgerRef });
+    createMobileSlider({
+      items: navItems,
+      navTree,
+      burgerRef,
+      animationState: AnimationState.INIT,
+    });
   };
 
   const [openLanguageModal, setOpenLanguageModal] = useState(false);

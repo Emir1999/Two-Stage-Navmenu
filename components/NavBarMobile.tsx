@@ -21,6 +21,7 @@ import {
   SectionLine,
 } from 'styles/NavBarUnderSectionStyles';
 
+import { AnimationState } from '@/models/props/NavBarUnderSectionProps';
 import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
 import { NavItem } from '@/models/NavItem';
 import bucherLogo from '@/public/bucherLogo.svg';
@@ -31,6 +32,7 @@ export default function NavBarMobile({
   items,
   navTree,
   burgerRef,
+  animationState,
 }: NavBarMobileProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -41,7 +43,12 @@ export default function NavBarMobile({
     const isRoot = document.getElementById('--mobile');
     if (isRoot) isRoot.remove();
 
-    createMobileSlider({ items: i, navTree: addNewTree, burgerRef });
+    createMobileSlider({
+      items: i,
+      navTree: addNewTree,
+      burgerRef,
+      animationState: AnimationState.FORWARD,
+    });
   };
 
   const children: NavItem | NavItem[] =
@@ -57,10 +64,21 @@ export default function NavBarMobile({
       items: removeOneFromTree[removeOneFromTree.length - 1],
       navTree: removeOneFromTree,
       burgerRef,
+      animationState: AnimationState.BACK,
     });
 
     removeOneFromTree.pop();
   };
+
+  let initial;
+  switch (animationState) {
+    case AnimationState.BACK:
+      initial = { x: 40, opacity: 0 };
+      break;
+    case AnimationState.FORWARD:
+      initial = { x: -40, opacity: 0 };
+      break;
+  }
 
   return (
     <>
@@ -77,7 +95,14 @@ export default function NavBarMobile({
           }
         }}
       >
-        <NavBarMobileContainer>
+        <NavBarMobileContainer
+          initial={
+            animationState == AnimationState.INIT
+              ? { x: -40, opacity: 0 }
+              : undefined
+          }
+          animate={{ x: 0, opacity: 1 }}
+        >
           <ImageContainer>
             <ImageStyled src={bucherLogo} alt="Logo" width={100} height={20} />
             <CloseButton
@@ -105,7 +130,7 @@ export default function NavBarMobile({
               <NavBarUnderTitle>{(items as NavItem).title}</NavBarUnderTitle>
             </NavBarUnderTitleSection>
           ) : null}
-          <NavBarItems>
+          <NavBarItems initial={initial} animate={{ x: 0, opacity: 1 }}>
             {children
               ? (children as NavItem[]).map((i: NavItem, index: number) => (
                   <NavBarUnderItem key={index}>

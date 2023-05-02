@@ -11,6 +11,7 @@ export const createUnderSection = ({
   setDropDown,
   parent,
   navTree,
+  animationState,
 }: NavBarUnderSectionProps) => {
   const navBarUnderRoot = document.createElement('div');
   navBarUnderRoot.id = '--child';
@@ -36,6 +37,7 @@ export const createUnderSection = ({
       item={item}
       setDropDown={setDropDown}
       ref={ref}
+      animationState={animationState}
       position={position}
       setBodyWidth={setBodyWidth}
       setDifferencePercentage={setDifferencePercentage}

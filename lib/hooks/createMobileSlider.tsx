@@ -6,6 +6,7 @@ export const createMobileSlider = ({
   items,
   navTree,
   burgerRef,
+  animationState,
 }: NavBarMobileProps) => {
   const navBarMobileRoot = document.createElement('div');
   navBarMobileRoot.id = '--mobile';
@@ -13,7 +14,12 @@ export const createMobileSlider = ({
   document.body.appendChild(navBarMobileRoot);
 
   const navBarUnder = (
-    <NavBarMobile items={items} navTree={navTree} burgerRef={burgerRef} />
+    <NavBarMobile
+      items={items}
+      navTree={navTree}
+      burgerRef={burgerRef}
+      animationState={animationState}
+    />
   );
   const root = createRoot(navBarMobileRoot);
 

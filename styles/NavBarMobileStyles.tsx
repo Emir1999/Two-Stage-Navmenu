@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { X } from 'react-feather';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const BarOne = styled.div`
@@ -93,7 +94,7 @@ export const ImageContainer = styled.div`
   margin-left: 2.5rem;
 `;
 
-export const NavBarMobileContainer = styled.div`
+export const NavBarMobileContainer = styled(motion.div)`
   height: 100%;
   width: 75%;
   position: relative;
