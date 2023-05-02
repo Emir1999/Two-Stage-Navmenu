@@ -5,8 +5,13 @@ export interface ChangeLanguageProps {
   position?: string;
 }
 
+export interface Language {
+  key: string;
+  value: string;
+}
+
 export default function ChangeLanguage({ position }: ChangeLanguageProps) {
-  const LANGUAGES = [
+  const languages: Language[] = [
     { key: 'de-CH', value: 'German' },
     { key: 'en-CH', value: 'English' },
   ];
@@ -22,13 +27,13 @@ export default function ChangeLanguage({ position }: ChangeLanguageProps) {
   return (
     <>
       <ChangeLanguageStyle
-        position={position}
+        position={position as string}
         name="languages"
         id="change-language"
         value={router.locale?.toUpperCase()}
         onChange={(e) => onLanguageChange(e)}
       >
-        {LANGUAGES.map((lang, index) => (
+        {languages.map((lang: Language, index: number) => (
           <option key={index} value={lang.key}>
             {lang.value}
           </option>

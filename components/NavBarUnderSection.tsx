@@ -14,32 +14,13 @@ import {
   NavBarUnderTitleSection,
   SectionLine,
 } from 'styles/NavBarUnderSectionStyles';
-import { NavItem, Position } from './NavBar';
-
-export interface NavBarUnderSectionProps {
-  item: NavItem;
-  parent: NavItem | NavItem[];
-  position: Position;
-  navTree: NavItem[] | [];
-  setBodyWidth: Dispatch<SetStateAction<number>>;
-  setDifferencePercentage: Dispatch<SetStateAction<number>>;
-  setDropDown: Dispatch<SetStateAction<boolean>>;
-  ref:
-    | ((instance: HTMLDivElement | null) => void)
-    | RefObject<HTMLDivElement>
-    | null
-    | undefined;
-}
+import { Position } from './NavBar';
+import { NavItem } from '@/models/NavItem';
+import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
+import { createUnderSection } from '@/lib/hooks/createUnderSection';
 
 const NavBarUnderSection = forwardRef(
-  (
-    props: NavBarUnderSectionProps,
-    ref:
-      | ((instance: HTMLDivElement | null) => void)
-      | RefObject<HTMLDivElement>
-      | null
-      | undefined
-  ) => {
+  (props: NavBarUnderSectionProps, ref: NavBarUnderSectionProps['ref']) => {
     const {
       setDropDown,
       item,
@@ -49,93 +30,54 @@ const NavBarUnderSection = forwardRef(
       parent,
       navTree,
     }: NavBarUnderSectionProps = props;
-    const children = item.children;
-    // const [items, setItems] = useState<Array<any>>(item.children);
 
-    const buttonClick = (e: any, i: any, p: any) => {
-      const rightBorderFromLeft = position.left + position.width;
+    const children: NavItem[] = item.children;
 
-      const addNewTree = navTree ? structuredClone(navTree) : [];
+    const buttonClick = (i: NavItem, p: NavItem) => {
+      const addNewTree: NavItem[] | [] = navTree
+        ? structuredClone(navTree)
+        : [];
+
       addNewTree.push(p);
 
       const isRoot = document.getElementById('--child');
       if (isRoot) isRoot.remove();
 
-      const navBarUnderRoot = document.createElement('div');
-      navBarUnderRoot.id = '--child';
-      navBarUnderRoot.style.position = 'absolute';
-      navBarUnderRoot.style.top = `${position.top + position.height}px`;
+      const underSectionProps: NavBarUnderSectionProps = {
+        item: i,
+        setDropDown,
+        ref,
+        position,
+        setBodyWidth,
+        setDifferencePercentage,
+        parent: p,
+        navTree: addNewTree,
+      };
 
-      const bodyWidth = document.body.offsetWidth;
-      const fromRight = bodyWidth - rightBorderFromLeft;
-
-      const leftPercentage = (position.left / bodyWidth) * 100;
-      const rightPercentage = (fromRight / bodyWidth) * 100;
-
-      const findPercentage = leftPercentage - rightPercentage;
-
-      setBodyWidth(bodyWidth);
-      setDifferencePercentage(findPercentage);
-      document.body.appendChild(navBarUnderRoot);
-
-      const navBarUnder = (
-        <NavBarUnderSection
-          item={i}
-          setDropDown={setDropDown}
-          ref={ref}
-          position={position}
-          setBodyWidth={setBodyWidth}
-          setDifferencePercentage={setDifferencePercentage}
-          parent={p}
-          navTree={addNewTree}
-        />
-      );
-      const root = createRoot(navBarUnderRoot);
-
-      root.render(navBarUnder);
+      createUnderSection({ ...underSectionProps });
     };
 
-    const buttonBack = (e: any, i: any) => {
+    const buttonBack = (i: NavItem | NavItem[]) => {
       const rightBorderFromLeft = position.left + position.width;
 
-      const removeOneFromTree = structuredClone(navTree);
+      const removeOneFromTree: NavItem[] | [] = structuredClone(navTree);
       removeOneFromTree.pop();
 
       const isRoot = document.getElementById('--child');
       if (isRoot) isRoot.remove();
 
-      const navBarUnderRoot = document.createElement('div');
-      navBarUnderRoot.id = '--child';
-      navBarUnderRoot.style.position = 'absolute';
-      navBarUnderRoot.style.top = `${position.top + position.height}px`;
+      const underSectionProps: NavBarUnderSectionProps = {
+        item: i as NavItem,
+        setDropDown,
+        ref,
+        position,
+        setBodyWidth,
+        setDifferencePercentage,
+        parent: removeOneFromTree[removeOneFromTree.length - 1],
+        navTree: removeOneFromTree,
+      };
 
-      const bodyWidth = document.body.offsetWidth;
-      const fromRight = bodyWidth - rightBorderFromLeft;
-
-      const leftPercentage = (position.left / bodyWidth) * 100;
-      const rightPercentage = (fromRight / bodyWidth) * 100;
-
-      const findPercentage = leftPercentage - rightPercentage;
-
-      setBodyWidth(bodyWidth);
-      setDifferencePercentage(findPercentage);
-      document.body.appendChild(navBarUnderRoot);
-
-      const navBarUnder = (
-        <NavBarUnderSection
-          item={i}
-          setDropDown={setDropDown}
-          ref={ref}
-          position={position}
-          setBodyWidth={setBodyWidth}
-          setDifferencePercentage={setDifferencePercentage}
-          navTree={removeOneFromTree}
-          parent={removeOneFromTree[removeOneFromTree.length - 1]}
-        />
-      );
-      const root = createRoot(navBarUnderRoot);
-
-      root.render(navBarUnder);
+      createUnderSection({ ...underSectionProps });
     };
 
     return (
@@ -148,7 +90,7 @@ const NavBarUnderSection = forwardRef(
         >
           {navTree.length > 0 ? (
             <NavBarUnderTitleSection>
-              <NavBarUnderTitleButton onClick={(e) => buttonBack(e, parent)}>
+              <NavBarUnderTitleButton onClick={() => buttonBack(parent)}>
                 <NavBarUnderChevronBack />
               </NavBarUnderTitleButton>
               <NavBarUnderTitle>{item.title}</NavBarUnderTitle>
@@ -164,9 +106,7 @@ const NavBarUnderSection = forwardRef(
                     {i.children?.length > 0 ? (
                       <>
                         <SectionLine />
-                        <NavBarUnderButton
-                          onClick={(e) => buttonClick(e, i, item)}
-                        >
+                        <NavBarUnderButton onClick={() => buttonClick(i, item)}>
                           <NavBarUnderChevronRight />
                         </NavBarUnderButton>
                       </>

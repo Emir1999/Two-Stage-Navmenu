@@ -1,7 +1,6 @@
 import { ChevronDown } from 'react-feather';
 import Link from 'next/link';
 import styled from 'styled-components';
-import ChangeLanguage from '@/components/ChangeLanguage';
 
 export const NavChevronDown = styled(ChevronDown)`
   font-weight: 600;
@@ -24,12 +23,13 @@ export const NavSpan = styled.span`
   }
 `;
 
-export const NavItem = styled(Link)`
+export const NavItemStyle = styled(Link)`
   display: flex;
   align-items: center;
   height: 100%;
   width: auto;
   font-weight: 500;
+  color: rgba(0, 0, 0, 1);
 
   &.active {
     padding-top: 0.2rem;

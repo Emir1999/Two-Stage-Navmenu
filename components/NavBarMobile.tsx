@@ -21,69 +21,44 @@ import {
   SectionLine,
 } from 'styles/NavBarUnderSectionStyles';
 import bucherLogo from '@/public/bucherLogo.svg';
-import { createRoot } from 'react-dom/client';
 import { useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { NavItem } from '@/models/NavItem';
+import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
+import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
 
 export default function NavBarMobile({
   items,
-  depth,
   navTree,
   burgerRef,
-}: any) {
+}: NavBarMobileProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const mobileForwardButton = (e: any, i: any, p: any) => {
+  const mobileForwardButton = (i: NavItem, p: NavItem | NavItem[]) => {
     const addNewTree = navTree ? structuredClone(navTree) : [];
-    addNewTree.push(p);
+    addNewTree.push(p as NavItem);
 
     const isRoot = document.getElementById('--mobile');
     if (isRoot) isRoot.remove();
 
-    const navBarMobileRoot = document.createElement('div');
-    navBarMobileRoot.id = '--mobile';
-
-    document.body.appendChild(navBarMobileRoot);
-
-    const navBarUnder = (
-      <NavBarMobile
-        items={i}
-        depth={depth + 1}
-        navTree={addNewTree}
-        burgerRef={burgerRef}
-      />
-    );
-    const root = createRoot(navBarMobileRoot);
-
-    root.render(navBarUnder);
+    createMobileSlider({ items: i, navTree: addNewTree, burgerRef });
   };
 
-  const children = depth > 0 ? items.children : items;
+  const children: NavItem | NavItem[] =
+    navTree.length > 0 ? (items as NavItem).children : items;
 
-  const mobileBackButton = (e: any, i: any) => {
+  const mobileBackButton = () => {
     const removeOneFromTree = structuredClone(navTree);
 
     const isRoot = document.getElementById('--mobile');
     if (isRoot) isRoot.remove();
 
-    const navBarMobileRoot = document.createElement('div');
-    navBarMobileRoot.id = '--mobile';
+    createMobileSlider({
+      items: removeOneFromTree[removeOneFromTree.length - 1],
+      navTree: removeOneFromTree,
+      burgerRef,
+    });
 
-    document.body.appendChild(navBarMobileRoot);
-
-    const navBarUnder = (
-      <NavBarMobile
-        items={removeOneFromTree[removeOneFromTree.length - 1]}
-        depth={depth - 1}
-        navTree={removeOneFromTree}
-        burgerRef={burgerRef}
-      />
-    );
     removeOneFromTree.pop();
-
-    const root = createRoot(navBarMobileRoot);
-
-    root.render(navBarUnder);
   };
 
   return (
@@ -93,8 +68,10 @@ export default function NavBarMobile({
         onClick={(e) => {
           if (e.target === ref.current) {
             const isRoot = document.getElementById('--mobile');
+            const currentBurger: HTMLButtonElement | null = burgerRef.current;
+
             if (!isRoot) return;
-            burgerRef.current.classList.remove('change');
+            currentBurger?.classList.remove('change');
             isRoot.remove();
           }
         }}
@@ -105,8 +82,11 @@ export default function NavBarMobile({
             <CloseButton
               onClick={() => {
                 const isRoot = document.getElementById('--mobile');
+                const currentBurger: HTMLButtonElement | null =
+                  burgerRef.current;
+
                 if (!isRoot) return;
-                burgerRef.current.classList.remove('change');
+                currentBurger?.classList.remove('change');
                 isRoot.remove();
               }}
             >
@@ -116,28 +96,26 @@ export default function NavBarMobile({
 
           <HorizontalLine />
 
-          {depth > 0 ? (
+          {navTree.length > 0 ? (
             <NavBarUnderTitleSection>
-              <NavBarUnderTitleButton
-                onClick={(e) => mobileBackButton(e, items)}
-              >
+              <NavBarUnderTitleButton onClick={() => mobileBackButton()}>
                 <NavBarUnderChevronBack />
               </NavBarUnderTitleButton>
-              <NavBarUnderTitle>{items.name}</NavBarUnderTitle>
+              <NavBarUnderTitle>{(items as NavItem).title}</NavBarUnderTitle>
             </NavBarUnderTitleSection>
           ) : null}
           <NavBarItems>
             {children
-              ? children.map((i: any, index: number) => (
+              ? (children as NavItem[]).map((i: NavItem, index: number) => (
                   <NavBarUnderItem key={index}>
                     <NavBarUnderName hasChildren={i.children?.length > 0}>
-                      <NavBarUnderNameSpan>{i.name}</NavBarUnderNameSpan>
+                      <NavBarUnderNameSpan>{i.title}</NavBarUnderNameSpan>
                     </NavBarUnderName>
                     {i.children?.length > 0 ? (
                       <>
                         <SectionLine />
                         <NavBarUnderButton
-                          onClick={(e) => mobileForwardButton(e, i, items)}
+                          onClick={() => mobileForwardButton(i, items)}
                         >
                           <NavBarUnderChevronRight />
                         </NavBarUnderButton>
