@@ -1,3 +1,37 @@
 {
-  "title": "Übersetzung testen"
+  "links": {
+    "about-us": "Über uns",
+    "mission": "Mission und Vision",
+    "board-directors": "Verwaltungsrat",
+    "group-managment": "Konzernleitung",
+    "metrics": "Kennzahlen",
+    "locations": "Standorte",
+    "sustainability": "Nachhaltigkeit",
+    "history": "Geschichte",
+    "business": "Geschäftsbereiche",
+    "kuhn": "Kuhn Group",
+    "municipal": "Bucher Municipal",
+    "hydraulics": "Bucher Hydraulics",
+    "emhart-glass": "Bucher Emhart Glass",
+    "specials": "Bucher Specials",
+    "investors": "Investoren",
+    "actions": "Aktie",
+    "general-assembly": "Generalversammlung",
+    "governance": "Corporate Governance",
+    "finance-reports": "Finanzberichte",
+    "appointments": "Termine",
+    "media": "Medien",
+    "media-share": "Medienmitteilung",
+    "ad": "Ad-hoc-Mitteilungen",
+    "media-dose": "Mediendossiers",
+    "publications": "Publikationen",
+    "presentations": "Präsentationen",
+    "photos": "Bilder",
+    "career": "Karriere",
+    "jobs": "Arbeiten bei Bucher Industries",
+    "contact": "Kontakt",
+    "subscribe": "Medienmitteilungen abonnieren",
+    "industries": "Wieso Bucher Industries",
+    "open-positions": "Offene Stellen"
+  }
 }

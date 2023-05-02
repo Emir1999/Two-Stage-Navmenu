@@ -16,7 +16,7 @@ import {
   BarTwo,
   BurgerButton,
 } from 'styles/NavBarMobileStyles';
-import { navItems } from 'lib/routes';
+import { NavItemsRoute } from 'lib/routes';
 import { NavItem } from '@/models/NavItem';
 import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
 import { createUnderSection } from '@/lib/hooks/createUnderSection';
@@ -34,6 +34,7 @@ export default function NavBar() {
   const [hoverButton, setHoverButton] = useState<boolean>(false);
 
   const burgerRef = useRef<HTMLButtonElement>(null);
+  const navItems: NavItem[] = NavItemsRoute();
 
   const myRef: (instance: HTMLElement | null) => void = useCallback(
     (node: HTMLElement | null) => {

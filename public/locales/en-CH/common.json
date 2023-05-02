@@ -1,3 +1,37 @@
 {
-  "title": "Testing translation"
+  "links": {
+    "about-us": "About us",
+    "mission": "Mission and Vision",
+    "board-directors": "Board of Directors",
+    "group-management": "Group Management",
+    "metrics": "Metrics",
+    "locations": "Locations",
+    "sustainability": "Sustainability",
+    "history": "History",
+    "business": "Businesses",
+    "kuhn": "Kuhn Group",
+    "municipal": "Bucher Municipal",
+    "hydraulics": "Bucher Hydraulics",
+    "emhart-glass": "Bucher Emhart Glass",
+    "specials": "Bucher specials",
+    "investors": "Investors",
+    "actions": "Action",
+    "general-assembly": "General Assembly",
+    "governance": "Corporate Governance",
+    "finance-reports": "Finance Reports",
+    "appointments": "Appointments",
+    "media": "Media",
+    "media-share": "Media release",
+    "ad": "Ad hoc notices",
+    "media-dose": "Media Dossiers",
+    "publications": "Publications",
+    "presentations": "Presentations",
+    "photos": "Images",
+    "career": "Career",
+    "jobs": "Working at Bucher Industries",
+    "contact": "Contact",
+    "subscribe": "Subscribe to media releases",
+    "industries": "Why Bucher Industries",
+    "open-positions": "Open Positions"
+  }
 }

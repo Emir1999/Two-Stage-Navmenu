@@ -1,4 +1,4 @@
-import { ChangeLanguageProps } from '@/components/ChangeLanguage';
+import { ChangeLanguageProps } from '@/models/props/ChangeLanguageProps';
 import styled, { css } from 'styled-components';
 
 export const ChangeLanguageStyle = styled.select`
