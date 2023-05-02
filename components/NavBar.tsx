@@ -1,4 +1,10 @@
 import {
+  BarOne,
+  BarThree,
+  BarTwo,
+  BurgerButton,
+} from 'styles/NavBarMobileStyles';
+import {
   NavChevronDown,
   NavContainer,
   NavItemStyle,
@@ -9,18 +15,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ChangeLanguage from './ChangeLanguage';
 import Image from 'next/image';
-import bucherLogo from '@/public/bucherLogo.svg';
-import {
-  BarOne,
-  BarThree,
-  BarTwo,
-  BurgerButton,
-} from 'styles/NavBarMobileStyles';
-import { NavItemsRoute } from 'lib/routes';
-import { NavItem } from '@/models/NavItem';
 import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
-import { createUnderSection } from '@/lib/hooks/createUnderSection';
+import { NavItem } from '@/models/NavItem';
+import { NavItemsRoute } from '@/lib/routes';
+import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
+import { createUnderSection } from '@/lib/hooks/createUnderSection';
 
 export interface Position extends DOMRect {
   rightBorder: number;

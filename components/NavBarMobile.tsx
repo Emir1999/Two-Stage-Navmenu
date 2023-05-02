@@ -20,11 +20,13 @@ import {
   NavBarUnderTitleSection,
   SectionLine,
 } from 'styles/NavBarUnderSectionStyles';
-import bucherLogo from '@/public/bucherLogo.svg';
-import { useRef } from 'react';
-import { NavItem } from '@/models/NavItem';
+
+import ChangeLanguage from './ChangeLanguage';
 import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
+import { NavItem } from '@/models/NavItem';
+import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
+import { useRef } from 'react';
 
 export default function NavBarMobile({
   items,

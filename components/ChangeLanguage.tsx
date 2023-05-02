@@ -1,7 +1,7 @@
 import { ChangeLanguageProps } from '@/models/props/ChangeLanguageProps';
+import { ChangeLanguageStyle } from 'styles/ChangeLanguageStyles';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { ChangeLanguageStyle } from 'styles/ChangeLanguageStyles';
 
 export default function ChangeLanguage({ position }: ChangeLanguageProps) {
   const LANGUAGES = [
@@ -13,6 +13,13 @@ export default function ChangeLanguage({ position }: ChangeLanguageProps) {
     LANGUAGES[0].key
   );
   const router = useRouter();
+
+  // useEffect(() => {
+  //   if (!router.isReady) return;
+  //   if (!router.query.token) {
+  //     console.log(router);
+  //   }
+  // }, []);
 
   const onLanguageChange = (e: any) => {
     useSelectedLanguage(e.target.value);
