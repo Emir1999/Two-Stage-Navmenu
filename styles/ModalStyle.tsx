@@ -54,7 +54,6 @@ export const ModalContainerStyle = styled(motion.div)`
   margin: 0 auto;
   left: 0;
   right: 0;
-  top: 50%;
 
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);

@@ -7,13 +7,6 @@ import {
 import { ChangeLanguageProps } from '@/models/props/ChangeLanguageProps';
 import Modal from './modals/Modal';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-
-interface ModalProps {
-  title: string;
-  openModal: boolean;
-  setOpenModal: () => void;
-}
 
 export default function ChangeLanguage({
   title,

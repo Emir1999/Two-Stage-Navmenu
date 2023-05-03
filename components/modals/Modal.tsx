@@ -7,10 +7,10 @@ import {
   ModalTitleStyle,
   XStyled,
 } from 'styles/ModalStyle';
+import { useEffect, useRef } from 'react';
 
 import { Overlay } from 'styles/NavBarMobileStyles';
 import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
 
 const ReactPortal = dynamic(() => import('../ReactPortal'), { ssr: true });
 
@@ -75,7 +75,7 @@ export default function Modal({
             </ModalCloseStyle>
           </ModalTitleContainerStyle>
 
-          <div>{children}</div>
+          {children}
         </ModalContainerStyle>
       </>
     </ReactPortal>

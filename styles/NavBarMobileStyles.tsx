@@ -104,6 +104,25 @@ export const NavBarMobileContainer = styled(motion.div)`
   padding: 1.5rem;
   background-color: rgba(255, 255, 255, 1);
 
+  &.move-left {
+    animation: slide-left 0.3s ease-out;
+  }
+
+  @keyframes slide-left {
+    0% {
+      left: 0;
+      opacity: 1;
+    }
+    20% {
+      left: 10px;
+      opacity: 0.8;
+    }
+    100% {
+      left: -1000px;
+      opacity: 0;
+    }
+  }
+
   @media (max-width: 425px) {
     width: 90%;
   }

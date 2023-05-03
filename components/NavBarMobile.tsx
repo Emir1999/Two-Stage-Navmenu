@@ -35,6 +35,7 @@ export default function NavBarMobile({
   animationState,
 }: NavBarMobileProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const navMobileRef = useRef<HTMLDivElement>(null);
 
   const mobileForwardButton = (i: NavItem, p: NavItem | NavItem[]) => {
     const addNewTree = navTree ? structuredClone(navTree) : [];
@@ -89,9 +90,13 @@ export default function NavBarMobile({
             const isRoot = document.getElementById('--mobile');
             const currentBurger: HTMLButtonElement | null = burgerRef.current;
 
+            navMobileRef?.current?.classList.add('move-left');
+
             if (!isRoot) return;
-            currentBurger?.classList.remove('change');
-            isRoot.remove();
+            setTimeout(() => {
+              currentBurger?.classList.remove('change');
+              isRoot.remove();
+            }, 250);
           }
         }}
       >
@@ -102,6 +107,7 @@ export default function NavBarMobile({
               : undefined
           }
           animate={{ x: 0, opacity: 1 }}
+          ref={navMobileRef}
         >
           <ImageContainer>
             <ImageStyled src={bucherLogo} alt="Logo" width={100} height={20} />
@@ -111,9 +117,13 @@ export default function NavBarMobile({
                 const currentBurger: HTMLButtonElement | null =
                   burgerRef.current;
 
+                navMobileRef?.current?.classList.add('move-left');
+
                 if (!isRoot) return;
-                currentBurger?.classList.remove('change');
-                isRoot.remove();
+                setTimeout(() => {
+                  currentBurger?.classList.remove('change');
+                  isRoot.remove();
+                }, 250);
               }}
             >
               <NavBarMobileXIcon />

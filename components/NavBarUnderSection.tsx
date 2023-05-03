@@ -107,8 +107,8 @@ const NavBarUnderSection = forwardRef(
         onMouseLeave={() => setDropDown(false)}
         ref={ref}
         id={
-          (parent as NavItem).id
-            ? (parent as NavItem).id + '--under'
+          (parent as NavItem)?.id
+            ? (parent as NavItem)?.id + '--under'
             : item.id + '--under'
         }
       >
