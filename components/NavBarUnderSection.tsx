@@ -19,7 +19,7 @@ import {
 
 import { NavItem } from '@/models/NavItem';
 import { createUnderSection } from '@/lib/hooks/createUnderSection';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 const NavBarUnderSection = forwardRef(
   (props: NavBarUnderSectionProps, ref: NavBarUnderSectionProps['ref']) => {
@@ -35,6 +35,7 @@ const NavBarUnderSection = forwardRef(
     }: NavBarUnderSectionProps = props;
 
     const children: NavItem[] = item.children;
+    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
     const buttonClick = (i: NavItem, p: NavItem) => {
       const addNewTree: NavItem[] | [] = navTree
@@ -98,7 +99,12 @@ const NavBarUnderSection = forwardRef(
         break;
     }
 
-    return (
+    useEffect(() => {
+      // Updating a state causes a re-render
+      setInitialRenderComplete(true);
+    }, []);
+
+    return initialRenderComplete ? (
       <NavBarUnderContainer
         layout
         initial={initial}
@@ -125,7 +131,7 @@ const NavBarUnderSection = forwardRef(
             ? children.map((i: any, index: number) => (
                 <NavBarUnderItem key={index}>
                   <NavBarUnderName
-                    href={'#'}
+                    href={'/'}
                     hasChildren={i.children?.length > 0}
                   >
                     <NavBarUnderNameSpan>{i.title}</NavBarUnderNameSpan>
@@ -143,7 +149,7 @@ const NavBarUnderSection = forwardRef(
             : null}
         </NavBarItems>
       </NavBarUnderContainer>
-    );
+    ) : null;
   }
 );
 

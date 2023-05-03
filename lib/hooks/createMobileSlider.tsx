@@ -1,6 +1,6 @@
 import NavBarMobile from '@/components/NavBarMobile';
 import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
-import { createRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 
 export const createMobileSlider = ({
   items,
@@ -21,7 +21,5 @@ export const createMobileSlider = ({
       animationState={animationState}
     />
   );
-  const root = createRoot(navBarMobileRoot);
-
-  root.render(navBarUnder);
+  hydrateRoot(navBarMobileRoot, navBarUnder);
 };

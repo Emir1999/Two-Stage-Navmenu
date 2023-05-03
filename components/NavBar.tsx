@@ -27,6 +27,7 @@ import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
 import { createUnderSection } from '@/lib/hooks/createUnderSection';
 import { useTranslation } from 'next-i18next';
+import NavBarUnderSection from './NavBarUnderSection';
 
 export interface Position extends DOMRect {
   rightBorder: number;
@@ -183,11 +184,13 @@ export default function NavBar() {
           <GlobeStyle />
         </LanguageButtonStyle>
         {openLanguageModal ? (
-          <ChangeLanguage
-            title={t('language')}
-            openModal={openLanguageModal}
-            setOpenModal={setOpenLanguageModal}
-          />
+          <>
+            <ChangeLanguage
+              title={t('language')}
+              openModal={openLanguageModal}
+              setOpenModal={setOpenLanguageModal}
+            />
+          </>
         ) : null}
       </NavContainer>
     </>

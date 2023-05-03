@@ -1,6 +1,7 @@
 import NavBarUnderSection from '@/components/NavBarUnderSection';
 import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
-import { createRoot } from 'react-dom/client';
+import { useEffect } from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 
 export const createUnderSection = ({
   position,
@@ -45,6 +46,5 @@ export const createUnderSection = ({
       navTree={navTree}
     />
   );
-  const root = createRoot(navBarUnderRoot);
-  root.render(navBarUnder);
+  hydrateRoot(navBarUnderRoot, navBarUnder);
 };

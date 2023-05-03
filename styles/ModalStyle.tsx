@@ -47,7 +47,7 @@ export const ModalContainerStyle = styled(motion.div)`
   z-index: 9999;
   width: 24rem;
   padding: 2rem;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 0.3rem;
   overflow: hidden;
   height: fit-content;

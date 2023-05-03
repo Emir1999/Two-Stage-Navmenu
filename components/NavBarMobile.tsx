@@ -26,7 +26,7 @@ import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
 import { NavItem } from '@/models/NavItem';
 import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function NavBarMobile({
   items,
@@ -36,6 +36,8 @@ export default function NavBarMobile({
 }: NavBarMobileProps) {
   const ref = useRef<HTMLDivElement>(null);
   const navMobileRef = useRef<HTMLDivElement>(null);
+
+  const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   const mobileForwardButton = (i: NavItem, p: NavItem | NavItem[]) => {
     const addNewTree = navTree ? structuredClone(navTree) : [];
@@ -81,7 +83,12 @@ export default function NavBarMobile({
       break;
   }
 
-  return (
+  useEffect(() => {
+    // Updating a state causes a re-render
+    setInitialRenderComplete(true);
+  }, []);
+
+  return initialRenderComplete ? (
     <>
       <Overlay
         ref={ref}
@@ -167,5 +174,5 @@ export default function NavBarMobile({
         </NavBarMobileContainer>
       </Overlay>
     </>
-  );
+  ) : null;
 }
