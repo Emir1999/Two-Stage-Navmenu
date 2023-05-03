@@ -131,7 +131,7 @@ const NavBarUnderSection = forwardRef(
             ? children.map((i: any, index: number) => (
                 <NavBarUnderItem key={index}>
                   <NavBarUnderName
-                    href={'/'}
+                    href={'/' + i.link}
                     hasChildren={i.children?.length > 0}
                   >
                     <NavBarUnderNameSpan>{i.title}</NavBarUnderNameSpan>
