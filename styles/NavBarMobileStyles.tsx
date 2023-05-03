@@ -95,40 +95,43 @@ export const ImageContainer = styled.div`
 `;
 
 export const NavBarMobileContainer = styled(motion.div)`
-  height: 100%;
-  width: 75%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 1);
+  display: none;
 
-  &.move-left {
-    animation: slide-left 0.3s ease-out;
-  }
+  @media (max-width: 768px) {
+    height: 100%;
+    width: 75%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 1);
 
-  @keyframes slide-left {
-    0% {
-      left: 0;
-      opacity: 1;
+    &.move-left {
+      animation: slide-left 0.3s ease-out;
     }
-    20% {
-      left: 10px;
-      opacity: 0.8;
-    }
-    100% {
-      left: -1000px;
-      opacity: 0;
-    }
-  }
 
-  @media (max-width: 425px) {
-    width: 90%;
-  }
+    @keyframes slide-left {
+      0% {
+        left: 0;
+        opacity: 1;
+      }
+      20% {
+        left: 10px;
+        opacity: 0.8;
+      }
+      100% {
+        left: -1000px;
+        opacity: 0;
+      }
+    }
+    @media (max-width: 425px) {
+      width: 90%;
+    }
 
-  @media (max-width: 375px) {
-    width: 100%;
+    @media (max-width: 375px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -137,20 +140,15 @@ export const HorizontalLine = styled.div`
 `;
 
 export const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-`;
+  display: none;
 
-const size = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '425px',
-  tablet: '768px',
-  laptop: '1024px',
-  laptopL: '1440px',
-  desktop: '2560px',
-};
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+`;

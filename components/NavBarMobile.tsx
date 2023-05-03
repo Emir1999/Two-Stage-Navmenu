@@ -144,7 +144,10 @@ export default function NavBarMobile({
             {children
               ? (children as NavItem[]).map((i: NavItem, index: number) => (
                   <NavBarUnderItem key={index}>
-                    <NavBarUnderName hasChildren={i.children?.length > 0}>
+                    <NavBarUnderName
+                      href={'#'}
+                      hasChildren={i.children?.length > 0}
+                    >
                       <NavBarUnderNameSpan>{i.title}</NavBarUnderNameSpan>
                     </NavBarUnderName>
                     {i.children?.length > 0 ? (

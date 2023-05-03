@@ -52,6 +52,7 @@ export const ModalContainerStyle = styled(motion.div)`
   overflow: hidden;
   height: fit-content;
   margin: 0 auto;
+  top: 40%;
   left: 0;
   right: 0;
 

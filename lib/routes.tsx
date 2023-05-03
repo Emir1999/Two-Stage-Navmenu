@@ -26,7 +26,21 @@ export function NavItemsRoute() {
           id: 'nav-bucher__group-managment',
           title: t('links.group-managment'),
           link: 'group-managment',
-          children: [],
+          children: [
+            {
+              id: 'nav-bucher__subscribe',
+              title: t('links.subscribe'),
+              link: 'subscribe',
+              children: [
+                {
+                  id: 'nav-bucher__industries',
+                  title: t('links.industries'),
+                  link: 'industries',
+                  children: [],
+                },
+              ],
+            },
+          ],
         },
         {
           id: 'nav-bucher__metrics',
@@ -185,22 +199,9 @@ export function NavItemsRoute() {
               id: 'nav-bucher__contact',
               title: t('links.contact'),
               link: 'contact',
-              children: [
-                {
-                  id: 'nav-bucher__subscribe',
-                  title: t('links.subscribe'),
-                  link: 'subscribe',
-                  children: [],
-                },
-              ],
+              children: [],
             },
           ],
-        },
-        {
-          id: 'nav-bucher__industries',
-          title: t('links.industries'),
-          link: 'industries',
-          children: [],
         },
         {
           id: 'nav-bucher__open-positions',

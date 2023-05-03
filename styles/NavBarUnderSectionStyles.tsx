@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'react-feather';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -49,7 +50,7 @@ interface NavBarUnderNameProps {
   hasChildren?: boolean;
 }
 
-export const NavBarUnderName = styled.div`
+export const NavBarUnderName = styled(Link)`
   height: 100%;
   width: auto;
   flex-grow: 1;

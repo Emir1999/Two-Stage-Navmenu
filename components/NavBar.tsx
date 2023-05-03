@@ -20,6 +20,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ChangeLanguage from './ChangeLanguage';
 import Image from 'next/image';
+import Link from 'next/link';
 import { NavItem } from '@/models/NavItem';
 import { NavItemsRoute } from '@/lib/routes';
 import bucherLogo from '@/public/bucherLogo.svg';
@@ -149,7 +150,15 @@ export default function NavBar() {
   return (
     <>
       <NavContainer>
-        <Image src={bucherLogo} alt="Logo" width={100} height={20} />
+        <Link as="/" href={'/'} passHref>
+          <Image
+            src={bucherLogo}
+            alt="Logo"
+            width={100}
+            height={20}
+            priority={true}
+          />
+        </Link>
 
         <NavItems>
           {navItems.map((item, index) => (
@@ -157,7 +166,7 @@ export default function NavBar() {
               id={item.id}
               onMouseLeave={() => onLeave()}
               onMouseEnter={(e) => onHover(e, item, navItems)}
-              href={{ pathname: 'navigate/[name]', query: { name: item.link } }}
+              href={{ pathname: '/[name]', query: { name: item.link } }}
               key={index}
             >
               <NavSpan>{item.title}</NavSpan>
