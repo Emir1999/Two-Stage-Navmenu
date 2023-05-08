@@ -1,4 +1,8 @@
 import {
+  AnimationState,
+  NavBarUnderSectionProps,
+} from '@/models/props/NavBarUnderSectionProps';
+import {
   BarOne,
   BarThree,
   BarTwo,
@@ -15,15 +19,15 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ChangeLanguage from './ChangeLanguage';
-import { Globe } from 'react-feather';
 import Image from 'next/image';
-import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
+import Link from 'next/link';
 import { NavItem } from '@/models/NavItem';
 import { NavItemsRoute } from '@/lib/routes';
 import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
 import { createUnderSection } from '@/lib/hooks/createUnderSection';
 import { useTranslation } from 'next-i18next';
+import NavBarUnderSection from './NavBarUnderSection';
 
 export interface Position extends DOMRect {
   rightBorder: number;
@@ -96,6 +100,7 @@ export default function NavBar() {
       setDifferencePercentage,
       parent: p,
       navTree: [],
+      animationState: AnimationState.INIT,
     };
 
     createUnderSection({ ...underSectionProps });
@@ -133,7 +138,12 @@ export default function NavBar() {
 
     const navTree: NavItem | NavItem[] | [] = [];
 
-    createMobileSlider({ items: navItems, navTree, burgerRef });
+    createMobileSlider({
+      items: navItems,
+      navTree,
+      burgerRef,
+      animationState: AnimationState.INIT,
+    });
   };
 
   const [openLanguageModal, setOpenLanguageModal] = useState(false);
@@ -141,7 +151,15 @@ export default function NavBar() {
   return (
     <>
       <NavContainer>
-        <Image src={bucherLogo} alt="Logo" width={100} height={20} />
+        <Link as="/" href={'/'} passHref>
+          <Image
+            src={bucherLogo}
+            alt="Logo"
+            width={100}
+            height={20}
+            priority={true}
+          />
+        </Link>
 
         <NavItems>
           {navItems.map((item, index) => (
@@ -149,7 +167,7 @@ export default function NavBar() {
               id={item.id}
               onMouseLeave={() => onLeave()}
               onMouseEnter={(e) => onHover(e, item, navItems)}
-              href={{ pathname: 'navigate/[name]', query: { name: item.link } }}
+              href={{ pathname: '/[name]', query: { name: item.link } }}
               key={index}
             >
               <NavSpan>{item.title}</NavSpan>
@@ -166,11 +184,13 @@ export default function NavBar() {
           <GlobeStyle />
         </LanguageButtonStyle>
         {openLanguageModal ? (
-          <ChangeLanguage
-            title={t('language')}
-            openModal={openLanguageModal}
-            setOpenModal={setOpenLanguageModal}
-          />
+          <>
+            <ChangeLanguage
+              title={t('language')}
+              openModal={openLanguageModal}
+              setOpenModal={setOpenLanguageModal}
+            />
+          </>
         ) : null}
       </NavContainer>
     </>

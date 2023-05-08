@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { X } from 'react-feather';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const BarOne = styled.div`
@@ -93,22 +94,44 @@ export const ImageContainer = styled.div`
   margin-left: 2.5rem;
 `;
 
-export const NavBarMobileContainer = styled.div`
-  height: 100%;
-  width: 75%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 1);
+export const NavBarMobileContainer = styled(motion.div)`
+  display: none;
 
-  @media (max-width: 425px) {
-    width: 90%;
-  }
+  @media (max-width: 768px) {
+    height: 100%;
+    width: 75%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 1);
 
-  @media (max-width: 375px) {
-    width: 100%;
+    &.move-left {
+      animation: slide-left 0.3s ease-out;
+    }
+
+    @keyframes slide-left {
+      0% {
+        left: 0;
+        opacity: 1;
+      }
+      20% {
+        left: 10px;
+        opacity: 0.8;
+      }
+      100% {
+        left: -1000px;
+        opacity: 0;
+      }
+    }
+    @media (max-width: 425px) {
+      width: 90%;
+    }
+
+    @media (max-width: 375px) {
+      width: 100%;
+    }
   }
 `;
 
@@ -117,6 +140,7 @@ export const HorizontalLine = styled.div`
 `;
 
 export const Overlay = styled.div`
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -124,13 +148,3 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 `;
-
-const size = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '425px',
-  tablet: '768px',
-  laptop: '1024px',
-  laptopL: '1440px',
-  desktop: '2560px',
-};

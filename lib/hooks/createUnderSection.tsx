@@ -1,6 +1,7 @@
 import NavBarUnderSection from '@/components/NavBarUnderSection';
 import { NavBarUnderSectionProps } from '@/models/props/NavBarUnderSectionProps';
-import { createRoot } from 'react-dom/client';
+import { useEffect } from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 
 export const createUnderSection = ({
   position,
@@ -11,6 +12,7 @@ export const createUnderSection = ({
   setDropDown,
   parent,
   navTree,
+  animationState,
 }: NavBarUnderSectionProps) => {
   const navBarUnderRoot = document.createElement('div');
   navBarUnderRoot.id = '--child';
@@ -36,6 +38,7 @@ export const createUnderSection = ({
       item={item}
       setDropDown={setDropDown}
       ref={ref}
+      animationState={animationState}
       position={position}
       setBodyWidth={setBodyWidth}
       setDifferencePercentage={setDifferencePercentage}
@@ -43,6 +46,5 @@ export const createUnderSection = ({
       navTree={navTree}
     />
   );
-  const root = createRoot(navBarUnderRoot);
-  root.render(navBarUnder);
+  hydrateRoot(navBarUnderRoot, navBarUnder);
 };

@@ -7,11 +7,10 @@ import {
   ModalTitleStyle,
   XStyled,
 } from 'styles/ModalStyle';
+import { useEffect, useRef } from 'react';
 
 import { Overlay } from 'styles/NavBarMobileStyles';
-import { X } from 'react-feather';
 import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
 
 const ReactPortal = dynamic(() => import('../ReactPortal'), { ssr: true });
 
@@ -64,7 +63,11 @@ export default function Modal({
     <ReactPortal wrapperId="react-portal-modal-container">
       <>
         <Overlay onClick={handleClose} />
-        <ModalContainerStyle onClick={(e: any) => e.stopPropagation()}>
+        <ModalContainerStyle
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          onClick={(e: any) => e.stopPropagation()}
+        >
           <ModalTitleContainerStyle>
             <ModalTitleStyle>{title}</ModalTitleStyle>
             <ModalCloseStyle onClick={handleClose}>
@@ -72,7 +75,7 @@ export default function Modal({
             </ModalCloseStyle>
           </ModalTitleContainerStyle>
 
-          <div>{children}</div>
+          {children}
         </ModalContainerStyle>
       </>
     </ReactPortal>

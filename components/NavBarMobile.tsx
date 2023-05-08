@@ -21,18 +21,23 @@ import {
   SectionLine,
 } from 'styles/NavBarUnderSectionStyles';
 
+import { AnimationState } from '@/models/props/NavBarUnderSectionProps';
 import { NavBarMobileProps } from '@/models/props/NavBarMobileProps';
 import { NavItem } from '@/models/NavItem';
 import bucherLogo from '@/public/bucherLogo.svg';
 import { createMobileSlider } from '@/lib/hooks/createMobileSlider';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function NavBarMobile({
   items,
   navTree,
   burgerRef,
+  animationState,
 }: NavBarMobileProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const navMobileRef = useRef<HTMLDivElement>(null);
+
+  const [initialRenderComplete, setInitialRenderComplete] = useState(false);
 
   const mobileForwardButton = (i: NavItem, p: NavItem | NavItem[]) => {
     const addNewTree = navTree ? structuredClone(navTree) : [];
@@ -41,7 +46,12 @@ export default function NavBarMobile({
     const isRoot = document.getElementById('--mobile');
     if (isRoot) isRoot.remove();
 
-    createMobileSlider({ items: i, navTree: addNewTree, burgerRef });
+    createMobileSlider({
+      items: i,
+      navTree: addNewTree,
+      burgerRef,
+      animationState: AnimationState.FORWARD,
+    });
   };
 
   const children: NavItem | NavItem[] =
@@ -57,12 +67,28 @@ export default function NavBarMobile({
       items: removeOneFromTree[removeOneFromTree.length - 1],
       navTree: removeOneFromTree,
       burgerRef,
+      animationState: AnimationState.BACK,
     });
 
     removeOneFromTree.pop();
   };
 
-  return (
+  let initial;
+  switch (animationState) {
+    case AnimationState.BACK:
+      initial = { x: 40, opacity: 0 };
+      break;
+    case AnimationState.FORWARD:
+      initial = { x: -40, opacity: 0 };
+      break;
+  }
+
+  useEffect(() => {
+    // Updating a state causes a re-render
+    setInitialRenderComplete(true);
+  }, []);
+
+  return initialRenderComplete ? (
     <>
       <Overlay
         ref={ref}
@@ -71,13 +97,25 @@ export default function NavBarMobile({
             const isRoot = document.getElementById('--mobile');
             const currentBurger: HTMLButtonElement | null = burgerRef.current;
 
+            navMobileRef?.current?.classList.add('move-left');
+
             if (!isRoot) return;
-            currentBurger?.classList.remove('change');
-            isRoot.remove();
+            setTimeout(() => {
+              currentBurger?.classList.remove('change');
+              isRoot.remove();
+            }, 250);
           }
         }}
       >
-        <NavBarMobileContainer>
+        <NavBarMobileContainer
+          initial={
+            animationState == AnimationState.INIT
+              ? { x: -40, opacity: 0 }
+              : undefined
+          }
+          animate={{ x: 0, opacity: 1 }}
+          ref={navMobileRef}
+        >
           <ImageContainer>
             <ImageStyled src={bucherLogo} alt="Logo" width={100} height={20} />
             <CloseButton
@@ -86,9 +124,13 @@ export default function NavBarMobile({
                 const currentBurger: HTMLButtonElement | null =
                   burgerRef.current;
 
+                navMobileRef?.current?.classList.add('move-left');
+
                 if (!isRoot) return;
-                currentBurger?.classList.remove('change');
-                isRoot.remove();
+                setTimeout(() => {
+                  currentBurger?.classList.remove('change');
+                  isRoot.remove();
+                }, 250);
               }}
             >
               <NavBarMobileXIcon />
@@ -105,11 +147,14 @@ export default function NavBarMobile({
               <NavBarUnderTitle>{(items as NavItem).title}</NavBarUnderTitle>
             </NavBarUnderTitleSection>
           ) : null}
-          <NavBarItems>
+          <NavBarItems initial={initial} animate={{ x: 0, opacity: 1 }}>
             {children
               ? (children as NavItem[]).map((i: NavItem, index: number) => (
                   <NavBarUnderItem key={index}>
-                    <NavBarUnderName hasChildren={i.children?.length > 0}>
+                    <NavBarUnderName
+                      href={'/' + i.link}
+                      hasChildren={i.children?.length > 0}
+                    >
                       <NavBarUnderNameSpan>{i.title}</NavBarUnderNameSpan>
                     </NavBarUnderName>
                     {i.children?.length > 0 ? (
@@ -129,5 +174,5 @@ export default function NavBarMobile({
         </NavBarMobileContainer>
       </Overlay>
     </>
-  );
+  ) : null;
 }

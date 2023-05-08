@@ -15,6 +15,10 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  a {
+    color: rgba(0, 0, 0, 1);
+  }
+
   a:link {
     text-decoration: none;
   }

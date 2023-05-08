@@ -1,4 +1,7 @@
 import { ChevronLeft, ChevronRight } from 'react-feather';
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const NavBarUnderChevronRight = styled(ChevronRight)`
@@ -47,7 +50,7 @@ interface NavBarUnderNameProps {
   hasChildren?: boolean;
 }
 
-export const NavBarUnderName = styled.div`
+export const NavBarUnderName = styled(Link)`
   height: 100%;
   width: auto;
   flex-grow: 1;
@@ -82,7 +85,7 @@ export const NavBarUnderItem = styled.div`
   height: 3.5rem;
 `;
 
-export const NavBarItems = styled.div`
+export const NavBarItems = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -134,7 +137,7 @@ export const NavBarUnderTitleSection = styled.div`
   height: 2.5rem;
 `;
 
-export const NavBarUnderContainer = styled.div`
+export const NavBarUnderContainer = styled(motion.div)`
   position: absolute;
   display: flex;
   flex-direction: column;
